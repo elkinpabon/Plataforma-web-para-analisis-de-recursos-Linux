@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador de Recursos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modalIndex.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+</head>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modal-title">
+                <i class="material-icons" id="modal-icon"></i>
+                <span id="modal-title-text"></span>
+            </h3>
+            <button id="modal-close" class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-image">
+                <img id="modal-image" src="{% static 'img/default.png' %}" alt="Imagen Representativa">
+            </div>
+            <div class="modal-details">
+                <ul id="modal-details-list"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<body>
+    <button class="menu-toggle" onclick="toggleMenu()">
+        <i class="material-icons">menu</i>
+    </button>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2>RECURSOS LINUX</h2>
+            <ul>
+                <li class="active"><a href="{% url 'index' %}"><i class="material-icons">home</i> Página Principal</a></li>
+                <li><a href="{% url 'cpu_monitor' %}"><i class="material-icons">memory</i> CPU</a></li>
+                <li><a href="{% url 'ram_monitor' %}"><i class="material-icons">storage</i> RAM</a></li>
+                <li><a href="{% url 'red_monitor' %}"><i class="material-icons">wifi</i> Red</a></li>
+                <li><a href="{% url 'disk_monitor' %}"><i class="material-icons">sd_storage</i> Uso de Disco</a></li>
+            </ul>
+        </aside>
+
+        <main class="content-wrapper">
+            <h1>Monitoreo de recursos sistema Linux:</h1>
+            <div class="summary">
+                <div class="card" data-type="cpu">
+                    <h3><i class="material-icons">memory</i> CPU</h3>
+                    <canvas id="cpuChart"></canvas>
+                    <p>Uso: <span id="cpu-usage">0%</span></p>
+                    <p>Velocidad: <span id="cpu-speed">0 GHz</span></p>
+                </div>
+                <div class="card" data-type="ram">
+                    <h3><i class="material-icons">storage</i> Memoria RAM</h3>
+                    <canvas id="ramChart"></canvas>
+                    <p>Usada: <span id="ram-used">0 GB</span></p>
+                    <p>Total: <span id="ram-total">0 GB</span></p>
+                </div>
+                <div class="card" data-type="net">
+                    <h3><i class="material-icons">wifi</i> Red</h3>
+                    <canvas id="netChart"></canvas>
+                    <p>Subida: <span id="net-upload">0 Mbps</span></p>
+                    <p>Bajada: <span id="net-download">0 Mbps</span></p>
+                </div>
+                <div class="card" data-type="disk">
+                    <h3><i class="material-icons">sd_storage</i> Uso de Disco</h3>
+                    <canvas id="diskChart"></canvas>
+                    <p>Espacio usado: <span id="disk-used">0 GB</span></p>
+                    <p>Total: <span id="disk-total">0 GB</span></p>
+                </div>
+                
+                <div class="system-info-grid">
+                    <h3><i class="material-icons">developer_board</i> Procesador</h3>
+                    <p id="cpu-model"></p>
+                
+                    <h3><i class="material-icons">speed</i> Velocidad</h3>
+                    <p id="cpu-base-speed"></p>
+                
+                    <h3><i class="material-icons">dns</i> Núcleos</h3>
+                    <p id="cpu-cores"></p>
+                
+                    <h3><i class="material-icons">memory</i> Procesadores Lógicos</h3>
+                    <p id="cpu-logical"></p>
+                
+                    <h3><i class="material-icons">settings</i> Sockets</h3>
+                    <p id="cpu-sockets"></p>
+                </div>
+
+            </div>
+
+            <button id="generateReport" class="report-btn">
+                <i class="material-icons">picture_as_pdf</i> INFORME
+            </button>
+            
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3><i class="material-icons">info</i> Sobre el Proyecto</h3>
+                <p>Analisis de Recursos en Linux para monitoreo de CPU, RAM, Disco y Red en tiempo real.</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="material-icons">contacts</i> Contacto</h3>
+                <p><i class="material-icons">email</i> eapabon@espe.edu.ec</p>
+                <p><i class="material-icons">phone</i> +593 0995473517</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="material-icons">link</i> Enlaces Útiles</h3>
+                <ul>
+                    <li><i class="material-icons">group</i> <a href="#">Equipo de desarrollo</a></li>
+                    <li><i class="material-icons">person</i> <a href="#">Información de Contacto</a></li>
+                    <li><i class="material-icons">code</i> <a href="#">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="footer-copy">
+            &copy; <span id="year"></span> Monitoreo de Recursos Linux | Desarrollado por <strong>ELKINEXT Solutions</strong> - I LOVE LINUX
+        </p>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/modalIndex.js' %}"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+
+</body>
+</html>
+

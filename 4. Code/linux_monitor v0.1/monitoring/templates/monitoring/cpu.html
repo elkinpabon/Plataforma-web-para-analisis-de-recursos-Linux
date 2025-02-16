@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor de CPU</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cpu.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <button class="menu-toggle" onclick="toggleMenu()">
+        <i class="material-icons">menu</i>
+    </button>
+
+    <div class="container">
+        
+        <aside class="sidebar">
+            <h2>RECURSOS LINUX</h2>
+            <ul>
+                <li><a href="{% url 'index' %}"><i class="material-icons">home</i> Página Principal</a></li>
+                <li class="active"><a href="{% url 'cpu_monitor' %}"><i class="material-icons">memory</i> CPU</a></li>
+                <li><a href="{% url 'ram_monitor' %}"><i class="material-icons">storage</i> RAM</a></li>
+                <li><a href="{% url 'red_monitor' %}"><i class="material-icons">wifi</i> Red</a></li>
+                <li><a href="{% url 'disk_monitor' %}"><i class="material-icons">sd_storage</i> Uso de Disco</a></li>
+            </ul>
+        </aside>
+
+        <main class="content-wrapper">
+            <h1>Monitoreo de CPU</h1>
+
+            <div class="parent">
+                <div class="div1 card">
+                    <h3><i class="material-icons">bar_chart</i> Uso de CPU</h3>
+                    <canvas id="cpuChart"></canvas>
+                    <p><strong>Uso:</strong> <span id="cpu-usage">0%</span></p>
+                    <p><strong>Velocidad:</strong> <span id="cpu-speed">0 GHz</span></p>
+                </div>
+
+                <div class="div2 card">
+                    <h3><i class="material-icons">developer_board</i> Información del CPU</h3>
+                    <ul>
+                        <li><strong>Modelo:</strong> <span id="cpu-model"></span></li>
+                        <li><strong>Velocidad:</strong> <span id="cpu-base-speed"></span></li>
+                        <li><strong>Núcleos:</strong> <span id="cpu-cores"></span></li>
+                        <li><strong>Procesadores Lógicos:</strong> <span id="cpu-logical"></span></li>
+                        <li><strong>Sockets:</strong> <span id="cpu-sockets"></span></li>
+                    </ul>
+                </div>
+
+                <div class="div3 card">
+                    <h3><i class="material-icons">equalizer</i> Procesos en Ejecución</h3>
+                    <p><strong>Total:</strong> <span id="running-processes">0</span></p>
+                </div>
+
+                <div class="div4 card">
+                    <h3><i class="material-icons">list</i> Lista de Procesos</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>PID</th>
+                                <th>Nombre</th>
+                                <th>CPU %</th>
+                                <th>RAM %</th>
+                            </tr>
+                        </thead>
+                        <tbody id="process-list">
+                        </tbody>
+                    </table>
+                    <button id="load-more">Cargar más</button>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3><i class="material-icons">info</i> Sobre el Proyecto</h3>
+                <p>Analisis de Recursos en Linux para monitoreo de CPU, RAM, Disco y Red en tiempo real.</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="material-icons">contacts</i> Contacto</h3>
+                <p><i class="material-icons">email</i> eapabon@espe.edu.ec</p>
+                <p><i class="material-icons">phone</i> +593 0995473517</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="material-icons">link</i> Enlaces Útiles</h3>
+                <ul>
+                    <li><i class="material-icons">group</i> <a href="#">Equipo de desarrollo</a></li>
+                    <li><i class="material-icons">person</i> <a href="#">Información de Contacto</a></li>
+                    <li><i class="material-icons">code</i> <a href="#">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="footer-copy">
+            &copy; <span id="year"></span> Monitoreo de Recursos Linux | Desarrollado por <strong>ELKINEXT Solutions</strong> - I LOVE LINUX
+        </p>
+    </footer>
+
+    <script src="{% static 'js/cpu.js' %}"></script>
+</body>
+</html>

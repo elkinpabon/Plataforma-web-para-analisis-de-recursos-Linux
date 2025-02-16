@@ -1,0 +1,192 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #1a1a1a;
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    overflow-y: auto;
+}
+
+.content-wrapper {
+    flex-grow: 1;
+    margin-left: 300px;
+    padding: 40px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, auto);
+    gap: 10px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: linear-gradient(90deg, #ff3b3b, #ff773b);
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    position: relative;
+    letter-spacing: 1.5px;
+    text-shadow: 1px 1px 5px rgba(255, 59, 59, 0.4);
+    border-bottom: 3px solid #ff3b3b;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: #ff3b3b;
+    margin: 6px auto 0 auto;
+    border-radius: 2px;
+}
+
+.card {
+    background: #222;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 4px 15px rgba(255, 59, 59, 0.3);
+    border: 1px solid rgba(255, 59, 59, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    text-align: center;
+}
+
+.card h3 {
+    font-size: 1.3em;
+    color: #ff3b3b;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.div1 {
+    grid-column: span 3;
+    grid-row: span 3;
+    background: linear-gradient(135deg, #292929, #1e1e1e);
+    text-align: center;
+    padding: 25px;
+}
+
+.div1 canvas {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 600px;
+    max-height: 300px;
+}
+
+.div2 {
+    grid-column: span 2;
+    grid-row: span 3;
+    background: linear-gradient(135deg, #1e1e1e, #292929);
+    text-align: center;
+    padding: 25px;
+}
+
+.div2 canvas {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 250px;
+    max-height: 250px;
+}
+
+.div3 {
+    grid-column: span 2;
+    grid-row: span 2;
+    background: linear-gradient(-45deg, #ff3b3b, #000000);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(255, 59, 59, 0.3);
+    text-align: center;
+}
+
+.div3 p {
+    font-size: 1.2em;
+    margin: 5px 0;
+}
+
+.div3 strong {
+    color: #ff3b3b;
+    font-weight: bold;
+}
+
+.div4 {
+    grid-column: span 3;
+    grid-row: span 2;
+    background: linear-gradient(135deg, #292929, #1e1e1e);
+    padding: 20px;
+}
+
+.div4 p {
+    font-size: 1.2em;
+    color: #f1f1f1;
+}
+
+.div4 strong {
+    color: #ff3b3b;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 1200px) {
+    .parent {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .div1, .div2, .div3, .div4 {
+        grid-column: span 1;
+        padding: 20px;
+    }
+
+    .div1 canvas, .div2 canvas {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .content-wrapper {
+        padding: 20px;
+    }
+
+    .div1, .div2, .div3, .div4 {
+        padding: 15px;
+    }
+
+    .div3 p, .div4 p {
+        font-size: 1em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .content-wrapper {
+        padding: 10px;
+    }
+
+    .div1, .div2, .div3, .div4 {
+        padding: 10px;
+    }
+
+    .div3 p, .div4 p {
+        font-size: 0.9em;
+    }
+}

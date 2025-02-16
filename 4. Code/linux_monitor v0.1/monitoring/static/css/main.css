@@ -1,0 +1,229 @@
+body {
+    margin: 0;
+    font-family: 'Poppins';
+    background-color: #1a1a1a;
+    color: white;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.content-wrapper {
+    margin-left: 280px;
+    padding: 20px;
+    width: calc(100% - 280px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 1.5em;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: linear-gradient(90deg, #ff3b3b, #ff773b);
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    position: relative;
+    letter-spacing: 1.5px;
+    text-shadow: 1px 1px 5px rgba(255, 59, 59, 0.4);
+    border-bottom: 3px solid #ff3b3b;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: #ff3b3b;
+    margin: 6px auto 0 auto;
+    border-radius: 2px;
+}
+
+.summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.card {
+    background: #262626;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(255, 59, 59, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    border-left: 5px solid #ff3b3b;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 12px rgba(255, 59, 59, 0.5);
+}
+
+.card h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 22px;
+    color: #ff3b3b;
+}
+
+canvas {
+    width: 100%;
+    height: 200px;
+    margin-top: 10px;
+}
+
+.card p {
+    font-size: 16px;
+}
+
+.card span {
+    font-weight: bold;
+    font-size: 18px;
+    color: #ff4d4d;
+}
+
+.system-info-grid {
+    background: #262626;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(255, 59, 59, 0.4); 
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px 20px;
+    width: 100%;
+    max-width: 750px;
+    margin-top: 5px;
+    border-left: 5px solid #ff3b3b;
+    grid-column: span 2;
+}
+
+.system-info-grid:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 12px rgba(255, 59, 59, 0.5);
+}
+
+.system-info-grid h3 {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: #ff3b3b;
+    margin: 0;
+    justify-content: flex-start;
+    gap: 10px;
+    text-align: left;
+}
+
+.system-info-grid p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    margin: 0;
+    text-align: center
+}
+
+.system-info-grid h3, 
+.system-info-grid p {
+    grid-column: span 2; 
+}
+
+.system-info-grid i {
+    font-size: 50px;
+    color: #ff3b3b;
+}
+
+@media screen and (max-width: 1024px) {
+    .content-wrapper {
+        margin-left: 0;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .summary {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    }
+
+    .system-info-grid {
+        max-width: 90%;
+    }
+
+    .system-info-grid h3 {
+        font-size: 18px;
+    }
+
+    .system-info-grid p {
+        font-size: 18px;
+    }
+
+    .system-info-grid i {
+        font-size: 40px; 
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .content-wrapper {
+        margin-left: 0;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .summary {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .system-info-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .system-info-grid h3 {
+        font-size: 16px; 
+    }
+
+    .system-info-grid p {
+        font-size: 16px; 
+    }
+
+    .system-info-grid i {
+        font-size: 35px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .summary {
+        grid-template-columns: 1fr;
+    }
+
+    .system-info-grid {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .system-info-grid h3 {
+        font-size: 14px;
+    }
+
+    .system-info-grid p {
+        font-size: 14px;
+    }
+
+    .system-info-grid i {
+        font-size: 30px; 
+    }
+}

@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor de Disco</title>
+    <link rel="stylesheet" href="{% static 'css/disk.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="content-wrapper">
+        <h1>Monitoreo de Disco</h1>
+        <aside class="sidebar">
+            <h2>RECURSOS LINUX</h2>
+            <ul>
+                <li><a href="{% url 'index' %}"><i class="material-icons">home</i> Página Principal</a></li>
+                <li><a href="{% url 'cpu_monitor' %}"><i class="material-icons">memory</i> CPU</a></li>
+                <li><a href="{% url 'ram_monitor' %}"><i class="material-icons">storage</i> RAM</a></li>
+                <li><a href="{% url 'red_monitor' %}"><i class="material-icons">wifi</i> Red</a></li>
+                <li class="active"><a href="{% url 'disk_monitor' %}"><i class="material-icons">sd_storage</i> Uso de Disco</a></li>
+            </ul>
+        </aside>
+
+        <div class="parent">
+            <div class="div1 card">
+                <h3>📊 Velocidad de Transferencia</h3>
+                <canvas id="diskTransferChart"></canvas>
+            </div>
+            <div class="div2 card">
+                <h3>🖴 Uso del Disco</h3>
+                <canvas id="diskUsageChart"></canvas>
+            </div>
+            <div class="div3 card">
+                <h3>📥📤 Velocidad de I/O</h3>
+                <p><strong>Escritura:</strong> <span id="disk-write-speed">0 MB/s</span></p>
+                <p><strong>Lectura:</strong> <span id="disk-read-speed">0 MB/s</span></p>
+            </div>
+            <div class="div4 card">
+                <h3>💽 Información del Disco</h3>
+                <p><strong>Total:</strong> <span id="disk-total">0 GB</span></p>
+                <p><strong>En uso:</strong> <span id="disk-used">0 GB</span></p>
+                <p><strong>Disponible:</strong> <span id="disk-free">0 GB</span></p>
+                <p><strong>Tipo:</strong> <span id="disk-type">Desconocido</span></p>
+                <p><strong>Formato:</strong> <span id="disk-format">Desconocido</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/disk.js' %}"></script>
+</body>
+</html>
