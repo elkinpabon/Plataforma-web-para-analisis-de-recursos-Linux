@@ -1,0 +1,11 @@
+Django==4.2  # Versión recomendada de Django
+mysqlclient==2.2.7  # Conector de MySQL para Django
+psutil==5.9.8  # Monitorización del sistema (CPU, RAM, Disco, Red)
+netifaces==0.11.0  # Información de interfaces de red
+platformdirs==4.2.0  # Obtención de información sobre el sistema
+python-dotenv==1.0.1  # Para variables de entorno
+gunicorn==21.2.0  # Servidor WSGI para producción (opcional)
+whitenoise==6.6.0  # Sirve archivos estáticos en producción
+Pillow==10.2.0  # Manipulación de imágenes (opcional, útil para informes con gráficos)
+setuptools==75.8.0  # Utilidad para paquetes de Python
+wheel==0.45.1  # Herramientas para construir paquetes de Python

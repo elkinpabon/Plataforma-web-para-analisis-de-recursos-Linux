@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+
+    {% include 'monitoring/menu.html' %}
+    <div class="containerProfile">
+        <div class="profile-container">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <h2>Mi Perfil</h2>
+                    <p>Usted es: <strong>{{ user.id_role.description_rol }}</strong></p>
+                    <p>Último inicio de sesión: <strong>{{ user.last_login }}</strong></p>
+                </div>
+    
+                <div class="profile-info">
+                    <p><i class="material-icons">person</i> <strong>Nombre:</strong> {{ user.name }}</p>
+                    <p><i class="material-icons">person_outline</i> <strong>Apellido:</strong> {{ user.lastname }}</p>
+                    <p><i class="material-icons">email</i> <strong>Email:</strong> {{ user.email }}</p>
+                    <p><i class="material-icons">security</i> <strong>Rol:</strong> {{ user.id_role.description_rol }}</p>
+                </div>
+    
+                <div class="profile-actions">
+                    <button class="btn" id="edit-profile-btn">Editar Perfil</button>
+                    <button class="btn danger">Cerrar Sesión</button>
+                </div>
+            </div>
+    
+            <div class="profile-shortcuts">
+                <a href="{% url 'index' %}" class="icon-btn"><i class="material-icons">home</i></a>
+                <a href="{% url 'cpu_monitor' %}" class="icon-btn"><i class="material-icons">memory</i></a>
+                <a href="{% url 'ram_monitor' %}" class="icon-btn"><i class="material-icons">storage</i></a>
+                <a href="{% url 'red_monitor' %}" class="icon-btn"><i class="material-icons">wifi</i></a>
+                <a href="{% url 'disk_monitor' %}" class="icon-btn"><i class="material-icons">sd_storage</i></a>
+                <a href="{% url 'history' %}" class="icon-btn"><i class="material-icons">history</i></a>
+                
+                {% if user.id_role.description_rol == "Administrator" %}
+                    <a href="{% url 'manage_users' %}" class="icon-btn"><i class="material-icons">supervisor_account</i></a>
+                {% endif %}
+            </div>
+        </div>
+    
+        <!-- 🚀 Modal de Edición de Perfil -->
+        <div id="edit-profile-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Editar Perfil</h2>
+                <form id="edit-profile-form">
+                    {% csrf_token %}
+                    <div class="input-box">
+                        <i class="material-icons">person</i>
+                        <input type="text" id="edit-name" name="name" value="{{ user.name }}" required placeholder="Nombre">
+                    </div>
+                    <div class="input-box">
+                        <i class="material-icons">person_outline</i>
+                        <input type="text" id="edit-lastname" name="lastname" value="{{ user.lastname }}" required placeholder="Apellido">
+                    </div>
+                    <div class="input-box">
+                        <i class="material-icons">email</i>
+                        <input type="email" id="edit-email" name="email" value="{{ user.email }}" required placeholder="Correo Electrónico">
+                    </div>
+                    <div class="input-box">
+                        <i class="material-icons">lock</i>
+                        <input type="password" id="edit-password" name="password" placeholder="Nueva Contraseña (opcional)">
+                    </div>
+                    <button type="submit" class="btn">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+            <!-- 🔄 Loader de Carga (sin fondo modal) -->
+        <div id="loading-container" style="display: none;">
+            <div class="loader"></div>
+        </div>
+    
+            <!-- 🚀 Modal de Mensajes -->
+        <div id="message-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="document.getElementById('message-modal').style.display='none'">&times;</span>
+                <p id="modal-message"></p>
+            </div>
+        </div>
+    
+        {% include 'monitoring/footer.html' %}
+    
+        <script src="{% static 'js/profile.js' %}"></script>
+    </div>
+
+</body>
+</html>

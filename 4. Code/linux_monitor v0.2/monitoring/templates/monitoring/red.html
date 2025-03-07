@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor de Red</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{% static 'css/red.css' %}">
+</head>
+<body>
+    <div class="container">
+        {% include 'monitoring/menu.html' %}
+        <main class="content-wrapper">
+            <h1>Monitoreo de Red</h1>
+            <div class="alert-section" style="width: 40%; text-align: center;">
+                {% include 'monitoring/red_alert.html' %}
+            </div>
+            <div class="parent">
+                <div class="div1 card">
+                    <h3>📡 <span class="highlight">Uso de Red</span></h3>
+                    <canvas id="networkChart"></canvas>
+                    <div class="network-info">
+                        <p><strong>🔌</strong> <span id="network-adapter">Detectando...</span></p>
+                        <p><strong></strong> <span id="network-upload">0 kbps</span></p>
+                        <p><strong></strong> <span id="network-download">0 kbps</span></p>
+                    </div>
+                </div>
+                
+                <div class="div2 card">
+                    <h3>🔗 Interfaces:</h3>
+                    <ul id="network-interfaces">
+                        <li>  Cargando...</li> 
+                    </ul>
+                </div>
+            
+                <div class="div3 card">
+                    <h3>🌐 Información de IP:</h3>
+                    <p><strong>IPv4:</strong> <span id="ipv4-address">Detectando...</span></p>
+                    <p><strong>IPv6:</strong> <span id="ipv6-address">Detectando...</span></p>
+                    <p><strong>Tipo de conexión:</strong> <span id="connection-type">Detectando...</span></p>
+                </div>
+            </div>
+                {% include 'monitoring/footer.html' %}
+        </main> 
+    </div>
+    <script src="{% static 'js/red.js' %}"></script>
+</body>
+
+</html>

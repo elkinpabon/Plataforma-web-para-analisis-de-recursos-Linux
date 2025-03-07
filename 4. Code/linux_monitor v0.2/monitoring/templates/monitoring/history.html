@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Reportes</title>
+    <link rel="stylesheet" href="{% static 'css/history.css' %}">
+</head>
+<body>
+
+    <div class="container">
+        {% include 'monitoring/menu.html' %}
+        <main class="content-wrapper">
+            <h1>Historial de Reportes</h1>
+
+            <!-- 🔍 Buscador con Filtro -->
+            <div class="search-container">
+                <select class="filterOption" id="filterOption">
+                    <option value="fecha">📅 Fecha</option>
+                    <option value="cpu">💻 CPU (%)</option>
+                    <option value="ram">🖥️ RAM (GB)</option>
+                </select>
+                <input type="text" id="searchInput" placeholder="Ingrese búsqueda...">
+            </div>
+
+            {% if reports %}
+                <table id="reportTable">
+                    <thead>
+                        <tr>
+                            <th>📅 Fecha</th>
+                            <th>💻 CPU (%)</th>
+                            <th>⚡ Velocidad (GHz)</th>
+                            <th>🖥️ RAM Usada (GB)</th>
+                            <th>🌐 Subida (kbps)</th>
+                            <th>⬇️ Bajada (kbps)</th>
+                            <th>💾 Disco Usado (GB)</th>
+                            <th>⚙️ Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for report in reports %}
+                        <tr>
+                            <td data-label="fecha">{{ report.timestamp_report }}</td>
+                            <td data-label="cpu">{{ report.cpu_usage }}</td>
+                            <td>{{ report.cpu_speed }}</td>
+                            <td data-label="ram">{{ report.ram_used }}</td>
+                            <td>{{ report.net_upload }}</td>
+                            <td>{{ report.net_download }}</td>
+                            <td>{{ report.disk_used }}</td>
+                            <td>
+                                <button class="delete-btn" onclick="deleteReport('{{ report.id_report }}')">🗑️</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No hay reportes guardados para este usuario.</p>
+            {% endif %}
+        </main>
+        {% include 'monitoring/footer.html' %}
+    </div>
+
+    <script src="{% static 'js/history.js' %}"></script>
+
+</body>
+</html>

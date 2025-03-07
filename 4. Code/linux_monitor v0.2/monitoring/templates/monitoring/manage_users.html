@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" href="{% static 'css/manage_users.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+    {% include 'monitoring/menu.html' %}
+
+    <div class="content-wrapper">
+        <h1 class="title">Gestión de Usuarios</h1>
+
+        <!-- 🔍 Buscador y filtro -->
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Buscar usuario...">
+            <select id="role-filter">
+                <option value="">Todos los roles</option>
+                <option value="Administrator">Administrador</option>
+                <option value="User">Usuario</option>
+            </select>
+        </div>
+
+        <!-- 📋 Tabla de usuarios -->
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="users-table">
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id_user }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.id_role.description_rol }}</td>
+                    <td>
+                        <button class="edit-btn"  
+                            onclick="openEditModal('{{ user.id_user }}', '{{ user.name }}', '{{ user.lastname }}', '{{ user.email }}', '{{ user.id_role.id }}')">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button class="delete-btn" onclick="confirmDelete('{{ user.id_user }}')">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+        <!-- 🚀 Modal para Editar Usuario -->
+    <div id="edit-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h2>Editar Usuario</h2>
+            <form id="edit-form" method="POST">
+                {% csrf_token %} <!-- 🔥 Agregamos el token CSRF -->
+                <input type="hidden" id="edit-user-id" name="user_id">
+                
+                <div class="input-box">
+                    <label>Nombre</label>
+                    <input type="text" id="edit-name" name="name" required>
+                </div>
+                <div class="input-box">
+                    <label>Apellido</label>
+                    <input type="text" id="edit-lastname" name="lastname" required>
+                </div>
+                <div class="input-box">
+                    <label>Email</label>
+                    <input type="email" id="edit-email" name="email" required>
+                </div>
+                <div class="input-box">
+                    <label>Rol</label>
+                    <select id="edit-role" name="role">
+                        <option value="1">Administrador</option>
+                        <option value="2">Usuario</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ⚠️ Modal de Confirmación para Eliminar -->
+    <div id="delete-modal" class="modal"  style="display: none;">
+        <div class="modal-content">
+            <h3>¿Estás seguro?</h3>
+            <p>Esta acción no se puede deshacer.</p>
+            <input type="hidden" id="delete-user-id">
+            <button class="btn danger" onclick="deleteUser()">Eliminar</button>
+            <br>
+            <br>
+            <button class="btn" onclick="closeDeleteModal()">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- 🔄 Modal de Carga -->
+    <div id="loading-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="loader"></div>
+            <p>Procesando...</p>
+        </div>
+    </div>
+
+        <!-- 🚀 Modal de Mensajes -->
+    <div id="message-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+            <p id="modal-message"></p>
+        </div>
+    </div>
+
+    {% include 'monitoring/footer.html' %}
+    <script src="{% static 'js/manage_users.js' %}"></script>
+</body>
+</html>

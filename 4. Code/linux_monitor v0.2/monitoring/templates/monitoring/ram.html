@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor de RAM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{% static 'css/ram.css' %}">
+    <script src="{% static 'js/ram.js' %}"></script>
+</head>
+<body>
+    <main class="content-wrapper">
+        <h1 class="title">MONITOREO DE RAM</h1>
+        {% include 'monitoring/menu.html' %}
+            <div class="alert-section" style="width: 40%; text-align: center;">
+                {% include 'monitoring/ram_alert.html' %}
+            </div>
+
+        <div class="parent">
+            <!-- Contenido de monitoreo -->
+            <div class="div1 card">
+                <h3><i class="material-icons">memory</i> Uso de RAM</h3>
+                <p><strong>En uso:</strong> <span id="ram-used-porcent" style="font-size: 1.5em; color: #ff5733;">0 %</span></p>
+                <canvas id="ramChartUsage"></canvas>
+                <p><strong>Uso:</strong> <span id="ram-used">0 GB</span></p>
+                
+                <p><strong>Total:</strong> <span id="ram-total">0 GB</span></p>
+            </div>
+
+            <div class="div2 card">
+                <h3><i class="material-icons">info</i> Información de RAM</h3>
+                <ul>
+                    <li><strong>Modelo:</strong> <span id="ram-model">Cargando...</span></li>
+                    <li><strong>Velocidad:</strong> <span id="ram-speed">Cargando...</span></li>
+                    <li><strong>Puertos disponibles:</strong> <span id="ram-slots">Cargando...</span></li>
+                    <li><strong>Puertos en uso:</strong> <span id="ram-slots-used">Cargando...</span></li>
+                    <li><strong>Factor de forma:</strong> <span id="ram-factor">Cargando...</span></li>
+                </ul>
+            </div>
+            
+            <div class="div3 card">
+                <h3><i class="material-icons">developer_board</i> Estado de Memoria</h3>
+                <p><strong>Libre:</strong> <span id="ram-free">0 GB</span></p>
+                <p><strong>En caché:</strong> <span id="ram-cache">0 GB</span></p>
+            </div>
+
+            <div class="div4 card">
+                <h3><i class="material-icons">pie_chart</i> Composición de Memoria</h3>
+                <canvas id="ramChartComposition"></canvas>
+            </div>
+
+        </div>
+        {% include 'monitoring/footer.html' %}
+    </main>
+</body>
+</html>

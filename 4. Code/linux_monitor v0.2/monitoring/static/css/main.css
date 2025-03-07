@@ -1,0 +1,357 @@
+body {
+    margin: 0;
+    font-family: 'Poppins';
+    background-color: #1a1a1a;
+    color: white;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.content-wrapper {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 260px;
+}
+
+h1 {
+    font-size: 1.5em;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: linear-gradient(90deg, #ff3b3b, #ff773b);
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    position: relative;
+    letter-spacing: 1.5px;
+    text-shadow: 1px 1px 5px rgba(255, 59, 59, 0.4);
+    border-bottom: 3px solid #ff3b3b;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: #ff3b3b;
+    margin: 6px auto 0 auto;
+    border-radius: 2px;
+}
+
+.summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Increase min-width of cards */
+    gap: 30px; /* Increase gap between cards */
+    width: 95%; /* Increase width of summary section */
+    max-width: 1300px; /* Increase max-width of summary section */
+    animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+}
+
+.card {
+    background: rgba(38, 38, 38, 0.8); /* Add transparency */
+    padding: 30px; /* Increase padding */
+    border-radius: 10px; /* Increase border-radius */
+    box-shadow: 0px 6px 12px rgba(255, 59, 59, 0.4); /* Increase box-shadow */
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    border-left: 6px solid rgba(255, 59, 59, 0.8); /* Add transparency to border */
+    animation: slideIn 0.5s ease-in-out; /* Add slide-in animation */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 12px rgba(255, 59, 59, 0.5);
+}
+
+.card h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Increase gap between icon and text */
+    font-size: 24px; /* Increase font-size */
+    color: #ff3b3b;
+}
+
+canvas {
+    width: 100%;
+    height: 200px;
+    margin-top: 10px;
+}
+
+.card p {
+    font-size: 18px; /* Increase font-size */
+}
+
+.card span {
+    font-weight: bold;
+    font-size: 20px; /* Increase font-size */
+    color: #ff4d4d;
+}
+
+.system-info-grid {
+    background: #262626;
+    padding: 20px; /* Increase padding */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(255, 59, 59, 0.4); 
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px 20px;
+    width: 100%;
+    max-width: 900px; /* Increase max-width */
+    margin-top: 10px; /* Increase margin-top */
+    border-left: 5px solid #ff3b3b;
+    grid-column: span 2;
+}
+
+.cambasdisk{
+    width: 40%;
+    height: 60px;
+    margin-top: 10px;
+}
+
+.system-info-grid:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 12px rgba(255, 59, 59, 0.5);
+}
+
+.system-info-grid h3 {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: #ff3b3b;
+    margin: 0;
+    justify-content: flex-start;
+    gap: 10px;
+    text-align: left;
+}
+
+.system-info-grid p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    margin: 0;
+    text-align: center
+}
+
+.system-info-grid h3, 
+.system-info-grid p {
+    grid-column: span 2; 
+}
+
+.system-info-grid i {
+    font-size: 50px;
+    color: #ff3b3b;
+}
+
+@media screen and (max-width: 1024px) {
+    .content-wrapper {
+        margin-left: 0;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .summary {
+        grid-template-columns: repeat(auto-fit, minmax(3000px, 1fr)); 
+    }
+
+    .system-info-grid {
+        max-width: 90%;
+    }
+
+    .system-info-grid h3 {
+        font-size: 18px;
+    }
+
+    .system-info-grid p {
+        font-size: 18px;
+    }
+
+    .system-info-grid i {
+        font-size: 40px; 
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .content-wrapper {
+        margin-left: 0;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .summary {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .system-info-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .system-info-grid h3 {
+        font-size: 16px; 
+    }
+
+    .system-info-grid p {
+        font-size: 16px; 
+    }
+
+    .system-info-grid i {
+        font-size: 35px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .summary {
+        grid-template-columns: 1fr;
+    }
+
+    .system-info-grid {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .system-info-grid h3 {
+        font-size: 14px;
+    }
+
+    .system-info-grid p {
+        font-size: 14px;
+    }
+
+    .system-info-grid i {
+        font-size: 30px; 
+    }
+}
+
+.save-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1b457c; /* Verde */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 20px;
+}
+
+.save-btn i {
+    margin-right: 8px;
+    font-size: 20px;
+}
+
+.save-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.save-btn:active {
+    background-color: #3d8b40;
+    transform: scale(0.95);
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Estilos para el modal */
+.modal {
+    display: none; /* Ocultar el modal por defecto */
+    position: fixed; /* Fijar el modal en la pantalla */
+    z-index: 1000; /* Asegurar que el modal esté por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Habilitar el scroll si el contenido es demasiado grande */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia */
+}
+
+.modal-content {
+    background-color: #262626; /* Fondo del contenido del modal */
+    margin: 15% auto; /* Centrar el modal verticalmente */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Ancho del modal */
+    max-width: 500px; /* Ancho máximo del modal */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra del modal */
+    animation: fadeIn 0.3s; /* Animación de aparición */
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #888;
+    padding-bottom: 10px;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 24px;
+    color: #ff3b3b;
+}
+
+.modal-body {
+    padding: 10px 0;
+    font-size: 18px;
+    color: #fff;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff3b3b;
+    cursor: pointer;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: #ff0000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

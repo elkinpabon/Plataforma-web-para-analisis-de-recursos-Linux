@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(#4b1f02, #370c4b); 
+} 
+
+
+.menu::-webkit-scrollbar {
+    display: none;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px; /* espacio de menu a los lados */
+    height: 100%;
+    transition: .3s;
+    scrollbar-width: none;
+    overflow: hidden scroll;
+    background: #ffffff12;
+    -ms-overflow-style: none;
+    padding: 30px 20px 20px 0; /* Add padding at the top for logo and name */
+    backdrop-filter: blur(5px);
+    box-shadow: 8px 0px 9px 0px #00000014;
+}
+
+.menu-content li span:nth-child(2) {
+    display: block; /* Always show text */
+}
+
+@media screen and (max-width: 768px) {
+    .menu {
+        width: 85px; /* Collapse menu on small screens */
+    }
+
+    .menu-content li span:nth-child(2) {
+        display: none; /* Hide text on small screens */
+    }
+
+    .menu:hover {
+        width: 260px; /* Expand menu on hover */
+    }
+
+    .menu:hover li span:nth-child(2) {
+        display: block; /* Show text on hover */
+    }
+}
+
+.menu-content li {
+    list-style: none;
+    border-radius: 0px 50px 50px 0;
+    transition: .3s;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.menu-content li:hover {
+    background: #f15a19; /* Subtle orange for hover */
+
+}
+
+a {
+    text-decoration: none;
+    color: rgb(213, 213, 213);
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins';
+    font-size: 18px; /* Increase font size */
+}
+
+.material-symbols-outlined {
+    padding: 10px;
+    font-size: 25px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: #ff773b; /* Subtle orange */
+    color: #ffffff; /* White icon color */
+}
+
+.material-symbols-outlined:hover {
+    background: #ff3b3b; /* Slightly darker orange for hover */
+}

@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión / Registrarse</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+    <!-- Fondo animado -->
+    <section>
+        {% for _ in "x"|rjust:150 %}
+        <span></span>
+        {% endfor %}
+    </section>
+
+    <div class="container">
+        <!-- Formulario de Login -->
+        <div class="form-box login">
+            <form method="POST" id="login-form">
+                {% csrf_token %}
+                <h1>Iniciar Sesión</h1>
+                <div class="input-box">
+                    <input type="text" name="email" required placeholder="Correo Electrónico" value="{{ request.GET.email|default:'' }}">
+                    <i class='bx bxs-envelope'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" name="password" required placeholder="Contraseña">
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <div class="forgot-link">
+                    <a href="#">¿Olvidaste tu contraseña?</a>
+                </div>
+                <button type="submit" class="btn">Entrar</button>
+                <br>
+                <br>
+                <button type="button" class="btn" onclick="redirectToIndex()">Regresar al Inicio</button>
+                <script>
+                    function redirectToIndex() {
+                        window.location.href = "{% url 'index' %}";
+                    }
+                </script>
+            </form>
+        </div>
+
+        <!-- Formulario de Registro -->
+        <div class="form-box register">
+            <form method="POST" id="register-form">
+                {% csrf_token %}
+                <h1>Registro</h1>
+                <div class="input-box">
+                    <input type="text" name="username" required placeholder="Nombre">
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" name="lastname" required placeholder="Apellido">
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box">
+                    <input type="email" name="email" required placeholder="Correo Electrónico">
+                    <i class='bx bxs-envelope'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" name="password" required placeholder="Contraseña">
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <button type="submit" class="btn">Registrarse</button>
+            </form>
+        </div>
+
+        <!-- Toggle entre Login y Registro -->
+        <div class="toggle-box">
+            <div class="toggle-panel toggle-left">
+                <h1>¡Bienvenido!</h1>
+                <p>¿Aún no tienes cuenta?</p>
+                <button class="btn register-btn">Registrarse</button>
+            </div>
+
+            <div class="toggle-panel toggle-right">
+                <h1>¡Hola de nuevo!</h1>
+                <p>¿Ya tienes cuenta?</p>
+                <button class="btn login-btn">Iniciar Sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para mensajes -->
+    <div id="message-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <i id="modal-icon" class="bx"></i>
+                <h2 id="modal-title"></h2>
+            </div>
+            <div class="modal-body">
+                <p id="modal-message"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeModal()">Cerrar</button>
+                <script>
+                    function closeModal() {
+                        document.getElementById('message-modal').style.display = 'none';
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loader de carga -->
+    <div id="loading-container" style="display: none;">
+        <div class="loader"></div>
+    </div>
+
+    <script src="{% static 'js/login.js' %}"></script>
+    <script src="{% static 'js/register.js' %}"></script>
+</body>
+
+</html>

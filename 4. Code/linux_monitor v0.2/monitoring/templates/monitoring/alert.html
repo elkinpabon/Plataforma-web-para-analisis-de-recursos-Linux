@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración de Alertas</title>
+    <link rel="stylesheet" href="{% static 'css/alert.css' %}">
+</head>
+<body data-user-email="{{ user.email }}">
+    <div class="alert-container">
+        <button id="open-alert-modal" class="btn-config-alert">⚙ Configurar Alerta</button>
+        <p><strong>Umbral configurado:</strong> <span id="configured-threshold">70%</span></p>
+        
+        <!-- Modal de configuración -->
+        <div id="alert-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Configurar Alerta de CPU</h2>
+
+                <div class="form-group">
+                    <label for="cpu-threshold">Umbral de alerta (%)</label>
+                    <input type="range" id="cpu-threshold" min="10" max="100" step="1" value="70"
+                        oninput="document.getElementById('threshold-value').innerText = this.value">
+                    <span id="threshold-value" class="range-value">70</span>
+                </div>
+
+                <!-- 📧 Muestra el email actual del usuario -->
+                <div class="form-group">
+                    <p><i class="material-icons">email</i> <strong>Correo electrónico para recibir alertas:</strong> 
+                        <span id="display-email">{{ user.email }}</span>
+                    </p>
+                    <div class="form-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="enable-email-alert"> Cambiar correo
+                        </label>
+                        <div id="email-config" style="display: none; margin-top: 10px;">
+                            <label for="email-address">Actualizar correo de alertas</label>
+                            <input type="email" id="email-address" placeholder="ejemplo@correo.com">
+                            <button id="save-email-btn">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="save-alert">Guardar Configuración</button>
+            </div>
+        </div>
+
+        <!-- Modal de alerta de CPU -->
+        <div id="cpu-alert-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>⚠️ Alerta de CPU Alta</h2>
+                <p>El uso de CPU ha superado el umbral configurado.</p>
+                <p><strong>Uso actual de CPU:</strong> <span id="current-cpu-usage"></span>%</p>
+                <p id="email-status"></p>
+                <p>Los procesos mas usados de la CPU son:</p>
+                <ul id="process-list-alert"></ul>
+                <button id="disable-ram-alerts" class="btn-disable-alerts">Desactivar Alertas</button>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/alert.js' %}"></script>
+    <script src="{% static 'js/report.js' %}"></script>
+</body>
+</html>

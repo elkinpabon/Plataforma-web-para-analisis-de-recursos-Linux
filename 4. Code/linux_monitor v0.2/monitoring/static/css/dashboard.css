@@ -1,0 +1,81 @@
+.report-btn {
+    background: #ff3b3b;
+    color: white;
+    border: none;
+    font-size: 18px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.3s ease, transform 0.2s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(255, 59, 59, 0.4);
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.report-btn i {
+    font-size: 22px;
+}
+
+.report-btn:hover {
+    background: #d32f2f;
+    transform: scale(1.05);
+}
+
+#generateReport {
+    background-color: #ff3b3b;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+#generateReport:hover {
+    background-color: #d32f2f;
+}
+
+.pdf-container {
+    font-family: "Poppins";
+}
+
+.pdf-title {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
+
+.pdf-subtitle {
+    font-size: 14px;
+    text-align: center;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.pdf-section {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.pdf-section-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff3b3b;
+    margin-bottom: 5px;
+}
+
+.pdf-footer {
+    font-size: 12px;
+    text-align: center;
+    color: #999;
+    margin-top: 20px;
+}
+

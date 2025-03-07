@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor de Disco</title>
+    <link rel="stylesheet" href="{% static 'css/disk.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    {% include 'monitoring/menu.html' %}
+    <div class="content-wrapper">
+        <h1>Monitoreo de Disco</h1>
+        <div class="parent">
+            <div class="div1 card">
+                <h3>📊 Velocidad de Transferencia</h3>
+                <canvas id="diskTransferChart"></canvas>
+            </div>
+            <div class="div2 card">
+                <h3>🖴 Uso del Disco</h3>
+                <canvas id="diskUsageChart"></canvas>
+            </div>
+            <div class="div3 card">
+                <h3>📥📤 Velocidad de I/O</h3>
+                <p><strong>Escritura:</strong> <span id="disk-write-speed">0 MB/s</span></p>
+                <p><strong>Lectura:</strong> <span id="disk-read-speed">0 MB/s</span></p>
+            </div>
+            <div class="div4 card">
+                <h3>💽 Información del Disco</h3>
+                <p><strong>Total:</strong> <span id="disk-total">0 GB</span></p>
+                <p><strong>En uso:</strong> <span id="disk-used">0 GB</span></p>
+                <p><strong>Disponible:</strong> <span id="disk-free">0 GB</span></p>
+                <p><strong>Tipo:</strong> <span id="disk-type">Desconocido</span></p>
+                <p><strong>Formato:</strong> <span id="disk-format">Desconocido</span></p>
+            </div>
+        </div>
+        <div style="width: 150%;">
+            {% include 'monitoring/footer.html' %}
+        </div>
+    </div>
+
+    <script src="{% static 'js/disk.js' %}"></script>
+</body>
+</html>

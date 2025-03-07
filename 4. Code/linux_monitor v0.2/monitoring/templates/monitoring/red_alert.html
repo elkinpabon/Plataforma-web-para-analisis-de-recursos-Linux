@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración de Alertas de RED</title>
+    <link rel="stylesheet" href="{% static 'css/ram_alert.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body data-user-email="{{ user.email }}">
+    <div class="alert-container">
+        <button id="open-red-alert-modal" class="btn-config-alert">⚙ Configurar Alerta de RED</button>
+        <p><strong>Umbral configurado:</strong> <span id="configured-threshold">70%</span></p>
+        
+        <!-- Modal de configuración -->
+        <div id="red-alert-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Configurar Alerta de RED</h2>
+
+                <div class="form-group">
+                    <label for="red-threshold">Umbral de alerta (%)</label>
+                    <input type="range" id="red-threshold" min="2" max="100" step="1" value="70"
+                        oninput="document.getElementById('red-threshold-value').innerText = this.value">
+                    <span id="red-threshold-value" class="range-value">70</span>
+                </div>
+
+                <!-- 📧 Muestra el email actual del usuario -->
+                <div class="form-group">
+                    <p><i class="material-icons">email</i> <strong>Correo electrónico para recibir alertas:</strong> 
+                        <span id="display-email">{{ user.email }}</span>
+                    </p>
+                    <div class="form-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="enable-email-alert"> Cambiar correo
+                        </label>
+                        <div id="email-config" style="display: none; margin-top: 10px;">
+                            <label for="email-address">Actualizar correo de alertas</label>
+                            <input type="email" id="email-address" placeholder="ejemplo@correo.com">
+                            <button id="save-email-btn">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="save-alert">Guardar Configuración</button>
+            </div>
+        </div>
+
+        <!-- Modal de alerta de RED -->
+        <div id="red-alert-popup" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>⚠️ Alerta de RED Alta</h2>
+                <p>El uso de RED ha superado el umbral configurado.</p>
+                <p><strong>Uso actual de RED:</strong> <span id="current-red-usage"></span>%</p>
+                <p id="email-red-status"></p>
+                <button id="disable-red-alerts" class="btn-disable-alerts">Desactivar Alertas</button>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/red_alert.js' %}"></script>
+    <script src="{% static 'js/report_red.js' %}"></script>
+</body>
+</html>
